@@ -2,6 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
+:root {
+  --brand-pink: #E11D48; /* accent pink/red */
+  --brand-cyan: #00BFA5; /* teal/cyan */
+  --gold: #FFD700;       /* gold accent */
+  --bg-neutral: #F8FAFC; /* dashboard bg */
+  --text-dark: #0F172A;  /* primary text */
+  --muted: #94A3B8;      /* muted text */
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -9,13 +20,14 @@
 }
 
 html {
+  font-family: 'Poppins', ui-sans-serif, system-ui, sans-serif;
+  font-size: 16px;
   scroll-behavior: smooth;
 }
 
 body {
-  font-family: system-ui, -apple-system, sans-serif;
-  background-color: #0f172a;
-  color: #e2e8f0;
+  background-color: var(--bg-neutral);
+  color: var(--text-dark);
 }
 
 /* Radix UI overrides */
@@ -23,21 +35,21 @@ body {
   background-color: rgba(0, 0, 0, 0.5);
 }
 
-/* Custom scrollbar */
+/* Custom scrollbar (light) */
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #1e293b;
+  background: #eef2f7;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #00E5E5;
+  background: var(--brand-cyan);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #FFD700;
+  background: #0EA392;
 }
