@@ -26,7 +26,7 @@ END $$;
 -- Configure these values before running
 DO $$
 DECLARE
-  v_email       text := 'admin@example.com';  -- CHANGE ME
+  v_email       text := 'snakeyes358@gmail.com';  -- CHANGE ME
   v_first_name  text := 'Super';              -- optional
   v_last_name   text := 'Admin';              -- optional
   v_user_id     uuid;
