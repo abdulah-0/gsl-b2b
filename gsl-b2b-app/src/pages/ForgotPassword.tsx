@@ -1,4 +1,3 @@
-```javascript
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
@@ -90,8 +89,8 @@ export const ForgotPassword = () => {
             </Link>
           </div>
         </div>
-      </div>
     </div>
+    </div >
   );
 };
 

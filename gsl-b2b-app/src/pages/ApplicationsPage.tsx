@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useAuth } from "../hooks/useAuth";
 import { programService } from "../services/programService";
 import { toast } from "sonner";
+import { Calendar, FileText, MapPin } from "lucide-react";
 
 interface ApplicationWithProgram {
   id: string;
@@ -49,39 +50,46 @@ export const ApplicationsPage = () => {
   const getStatusColor = (status: string) => {
     switch (status) {
       case "pending":
-        return "bg-yellow-500/20 text-yellow-400 border-yellow-500/50";
+        return "bg-yellow-100 text-yellow-700 border-yellow-200";
       case "accepted":
-        return "bg-green-500/20 text-green-400 border-green-500/50";
+        return "bg-green-100 text-green-700 border-green-200";
       case "rejected":
-        return "bg-red-500/20 text-red-400 border-red-500/50";
+        return "bg-red-100 text-red-700 border-red-200";
       default:
-        return "bg-slate-500/20 text-slate-400 border-slate-500/50";
+        return "bg-gray-100 text-gray-700 border-gray-200";
     }
   };
 
   if (loading) {
     return (
       <div className="flex items-center justify-center h-96">
-        <div className="text-cyan">Loading applications...</div>
+        <div className="h-8 w-8 border-4 border-[#ea580c]/30 border-t-[#ea580c] rounded-full animate-spin" />
       </div>
     );
   }
 
   return (
-    <div>
-      <h1 className="text-3xl font-bold text-cyan mb-6">My Applications</h1>
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="flex items-center justify-between mb-8">
+        <div>
+          <h1 className="text-2xl font-bold text-gray-900">My Applications</h1>
+          <p className="text-gray-500 mt-1">Track the status of your university applications</p>
+        </div>
+        <button className="bg-[#1c1c1c] text-white px-4 py-2 rounded-xl text-sm font-bold hover:bg-black transition-colors shadow-sm">
+          + New Application
+        </button>
+      </div>
 
       {/* Filter Tabs */}
-      <div className="flex gap-2 mb-6 flex-wrap">
+      <div className="flex gap-2 mb-8 border-b border-gray-200 pb-1">
         {(["all", "pending", "accepted", "rejected"] as const).map((status) => (
           <button
             key={status}
             onClick={() => setFilter(status)}
-            className={`px-4 py-2 rounded-lg font-semibold transition capitalize ${
-              filter === status
-                ? "bg-cyan text-slate-900"
-                : "bg-slate-800 text-slate-300 hover:bg-slate-700"
-            }`}
+            className={`px-4 py-2 rounded-lg font-semibold transition-all capitalize text-sm relative top-[1px] ${filter === status
+                ? "text-[#ea580c] border-b-2 border-[#ea580c]"
+                : "text-gray-500 hover:text-gray-700"
+              }`}
           >
             {status}
           </button>
@@ -89,55 +97,62 @@ export const ApplicationsPage = () => {
       </div>
 
       {/* Applications List */}
-      <div className="space-y-4">
+      <div className="grid gap-4">
         {filteredApplications.map((app) => (
           <div
             key={app.id}
-            className="bg-slate-800 border border-slate-700 rounded-lg p-6 hover:border-cyan transition"
+            className="bg-white border border-gray-100 rounded-2xl p-6 shadow-[0_2px_8px_rgba(0,0,0,0.04)] hover:shadow-md transition-all group"
           >
             <div className="flex items-start justify-between">
-              <div className="flex-1">
-                <h3 className="text-lg font-bold text-cyan mb-2">
-                  {app.programs.title}
-                </h3>
-                <p className="text-slate-400 text-sm mb-1">
-                  {app.programs.institution}
-                </p>
-                <p className="text-slate-400 text-sm mb-4">
-                  {app.programs.country}
-                </p>
-                <p className="text-slate-500 text-xs">
-                  Applied on: {new Date(app.created_at).toLocaleDateString()}
-                </p>
+              <div className="flex gap-4">
+                <div className="h-12 w-12 bg-gray-50 rounded-xl flex items-center justify-center border border-gray-100">
+                  <FileText className="h-6 w-6 text-gray-400 group-hover:text-[#ea580c] transition-colors" />
+                </div>
+                <div>
+                  <h3 className="text-lg font-bold text-gray-900 mb-1">
+                    {app.programs.title}
+                  </h3>
+                  <div className="flex items-center gap-4 text-sm text-gray-500">
+                    <span className="font-medium text-gray-700">{app.programs.institution}</span>
+                    <span className="flex items-center gap-1">
+                      <MapPin className="h-3.5 w-3.5" />
+                      {app.programs.country}
+                    </span>
+                    <span className="flex items-center gap-1">
+                      <Calendar className="h-3.5 w-3.5" />
+                      Applied: {new Date(app.created_at).toLocaleDateString()}
+                    </span>
+                  </div>
+                </div>
               </div>
 
-              <div className="text-right">
+              <div className="flex items-center gap-4">
                 <span
-                  className={`inline-block px-4 py-2 rounded-lg border font-semibold text-sm capitalize ${getStatusColor(
+                  className={`px-3 py-1 rounded-full border font-bold text-xs capitalize ${getStatusColor(
                     app.status
                   )}`}
                 >
                   {app.status}
                 </span>
+                <button className="text-gray-400 hover:text-gray-600 transition-colors">
+                  <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                </button>
               </div>
-            </div>
-
-            <div className="mt-4 flex gap-2">
-              <button className="px-4 py-2 bg-slate-700 text-cyan rounded-lg hover:bg-slate-600 transition text-sm">
-                View Details
-              </button>
-              <button className="px-4 py-2 bg-slate-700 text-slate-300 rounded-lg hover:bg-slate-600 transition text-sm">
-                Track Status
-              </button>
             </div>
           </div>
         ))}
       </div>
 
       {filteredApplications.length === 0 && (
-        <div className="text-center py-12">
-          <p className="text-slate-400 text-lg">
-            No {filter !== "all" ? filter : ""} applications found
+        <div className="text-center py-16 bg-white rounded-2xl border border-gray-100 border-dashed">
+          <div className="h-16 w-16 bg-gray-50 rounded-full flex items-center justify-center mx-auto mb-4">
+            <FileText className="h-8 w-8 text-gray-300" />
+          </div>
+          <h3 className="text-lg font-bold text-gray-900 mb-1">No applications found</h3>
+          <p className="text-gray-500 text-sm">
+            You haven't {filter !== "all" ? filter : ""} any applications yet.
           </p>
         </div>
       )}

@@ -9,6 +9,8 @@ import { DashboardHome } from "./pages/DashboardHome";
 import { ProfilePage } from "./pages/ProfilePage";
 import { ProgramsPage } from "./pages/ProgramsPage";
 import { ApplicationsPage } from "./pages/ApplicationsPage";
+import { OffersPage } from "./pages/OffersPage";
+import { ShortlistsPage } from "./pages/ShortlistsPage";
 import { PlaceholderPage } from "./pages/PlaceholderPage";
 import { ProtectedRoute } from "./pages/ProtectedRoute";
 
@@ -38,8 +40,8 @@ function App() {
           <Route path="preferences" element={<PlaceholderPage title="Preferences" icon="⚙️" />} />
           <Route path="programs" element={<ProgramsPage />} />
           <Route path="applications" element={<ApplicationsPage />} />
-          <Route path="shortlists" element={<PlaceholderPage title="Shortlists" icon="⭐" />} />
-          <Route path="offers" element={<PlaceholderPage title="Offers" icon="🎁" />} />
+          <Route path="shortlists" element={<ShortlistsPage />} />
+          <Route path="offers" element={<OffersPage />} />
           <Route path="events" element={<PlaceholderPage title="Events" icon="📅" />} />
           <Route path="help" element={<PlaceholderPage title="Help & Support" icon="❓" />} />
         </Route>
