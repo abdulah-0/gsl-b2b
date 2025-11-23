@@ -26,15 +26,15 @@ export function Sidebar() {
   const location = useLocation();
 
   return (
-    <div className="flex h-full w-24 flex-col items-center bg-[#2d2d2d] py-6 text-white">
+    <div className="flex h-full w-20 flex-col items-center bg-[#1c1c1c] py-6 text-white transition-all duration-300">
       <div className="mb-8">
-        {/* Logo Placeholder - Red Bird/Globe */}
-        <div className="flex h-10 w-10 items-center justify-center rounded-full bg-white p-1">
-          <span className="text-xl font-bold text-orange-500">G</span>
+        {/* Logo Placeholder */}
+        <div className="flex h-10 w-10 items-center justify-center rounded-full bg-white p-1 shadow-md">
+          <span className="text-xl font-bold text-[#ea580c]">G</span>
         </div>
       </div>
 
-      <nav className="flex flex-1 flex-col items-center gap-6 w-full">
+      <nav className="flex flex-1 flex-col items-center gap-8 w-full">
         {navigation.map((item) => {
           const isActive = location.pathname === item.href ||
             (item.href !== "/dashboard" && location.pathname.startsWith(item.href));
@@ -43,12 +43,12 @@ export function Sidebar() {
               key={item.name}
               to={item.href}
               className={cn(
-                "group flex flex-col items-center justify-center gap-1 p-2 text-xs font-medium text-gray-400 transition-colors hover:text-white w-full border-l-4 border-transparent",
-                isActive && "text-white border-white bg-white/10"
+                "group flex flex-col items-center justify-center gap-1.5 py-2 text-xs font-medium text-gray-500 transition-all hover:text-white w-full border-l-[3px] border-transparent relative",
+                isActive && "text-white border-white bg-white/5"
               )}
             >
-              <item.icon className={cn("h-6 w-6", isActive ? "text-white" : "text-gray-400 group-hover:text-white")} />
-              <span className="text-[10px] text-center leading-tight max-w-[60px]">{item.name}</span>
+              <item.icon className={cn("h-5 w-5 transition-colors", isActive ? "text-white" : "text-gray-500 group-hover:text-white")} />
+              <span className="text-[9px] text-center leading-tight max-w-[60px] font-normal">{item.name}</span>
             </Link>
           );
         })}
