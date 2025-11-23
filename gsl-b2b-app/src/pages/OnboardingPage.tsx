@@ -61,7 +61,7 @@ export const OnboardingPage = () => {
             // but usually navigation is enough if the protected route checks the DB or if we update local state.
             // For now, we'll navigate to dashboard.
             navigate("/dashboard");
-            window.location.reload(); // Reload to ensure auth hook picks up the new profile state if it fetches it
+            // window.location.reload(); // Removed to prevent 404 on refresh
         } catch (error) {
             console.error("Full error object:", JSON.stringify(error, null, 2));
             toast.error(`Failed to update profile: ${(error as any)?.message || "Unknown error"}`);
