@@ -150,7 +150,7 @@ export const Login = () => {
         </form>
 
         <div className="mt-8 pt-6 border-t border-gray-100">
-          <div className="space-y-3">
+          {/* <div className="space-y-3">
             <button className="w-full bg-white border border-gray-200 text-gray-700 font-semibold py-2.5 rounded-xl hover:bg-gray-50 transition-colors flex items-center justify-center gap-2 text-sm">
               <svg className="h-5 w-5" viewBox="0 0 24 24">
                 <path
@@ -172,7 +172,7 @@ export const Login = () => {
               </svg>
               Sign in with Google
             </button>
-          </div>
+          </div> */}
         </div>
 
         <p className="mt-8 text-center text-sm text-gray-500 font-medium">

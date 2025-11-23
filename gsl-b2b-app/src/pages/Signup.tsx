@@ -42,8 +42,9 @@ export const Signup = () => {
     setLoading(true);
     try {
       await authService.signUp(data.email, data.password, data.mobile);
-      toast.success("Signup successful! Please verify your email.");
-      navigate("/otp-verification", { state: { email: data.email } });
+      toast.success("Signup successful!");
+      navigate("/dashboard");
+      // navigate("/otp-verification", { state: { email: data.email } });
     } catch (error) {
       toast.error(
         error instanceof Error ? error.message : "Signup failed. Please try again."
@@ -180,7 +181,7 @@ export const Signup = () => {
         </form>
 
         <div className="mt-8 pt-6 border-t border-gray-100">
-          <button className="w-full bg-white border border-gray-200 text-gray-700 font-semibold py-2.5 rounded-xl hover:bg-gray-50 transition-colors flex items-center justify-center gap-2 text-sm">
+          {/* <button className="w-full bg-white border border-gray-200 text-gray-700 font-semibold py-2.5 rounded-xl hover:bg-gray-50 transition-colors flex items-center justify-center gap-2 text-sm">
             <svg className="h-5 w-5" viewBox="0 0 24 24">
               <path
                 d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
@@ -200,7 +201,7 @@ export const Signup = () => {
               />
             </svg>
             Sign up with Google
-          </button>
+          </button> */}
         </div>
 
         <p className="mt-8 text-center text-sm text-gray-500 font-medium">
