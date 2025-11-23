@@ -63,8 +63,8 @@ export const OnboardingPage = () => {
             navigate("/dashboard");
             window.location.reload(); // Reload to ensure auth hook picks up the new profile state if it fetches it
         } catch (error) {
-            console.error("Full error object:", error);
-            toast.error("Failed to update profile. Please check console for details.");
+            console.error("Full error object:", JSON.stringify(error, null, 2));
+            toast.error(`Failed to update profile: ${(error as any)?.message || "Unknown error"}`);
         } finally {
             setLoading(false);
         }
