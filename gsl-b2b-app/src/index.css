@@ -1,8 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+@import "tailwindcss";
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 
 @layer base {
   :root {
@@ -53,21 +51,14 @@
 
 @layer base {
   * {
-    @apply border-border;
+    border-color: hsl(var(--border));
   }
 
   body {
-    @apply bg-[#f8f9fa] text-foreground font-sans antialiased;
-    font-family: 'Inter', sans-serif;
+    @apply bg-background text-foreground font-sans antialiased;
   }
 }
 
-/* Radix UI overrides */
-[data-radix-dialog-overlay] {
-  background-color: rgba(0, 0, 0, 0.5);
-}
-
-/* Custom scrollbar (light) */
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
