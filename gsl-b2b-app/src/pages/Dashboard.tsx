@@ -4,21 +4,19 @@ import { Sidebar } from "../components/Sidebar";
 import { Navbar } from "../components/Navbar";
 
 export const Dashboard = () => {
-  const [sidebarOpen, setSidebarOpen] = useState(true);
-
   return (
-    <div className="flex h-screen bg-gradient-dark">
+    <div className="flex h-screen bg-[#f3f4f6]">
       {/* Sidebar */}
-      <Sidebar open={sidebarOpen} onToggle={() => setSidebarOpen(!sidebarOpen)} />
+      <Sidebar />
 
       {/* Main Content */}
       <div className="flex-1 flex flex-col overflow-hidden">
         {/* Navbar */}
-        <Navbar onMenuClick={() => setSidebarOpen(!sidebarOpen)} />
+        <Navbar />
 
         {/* Page Content */}
         <main className="flex-1 overflow-auto">
-          <div className="p-6">
+          <div className="p-6 max-w-7xl mx-auto">
             <Outlet />
           </div>
         </main>

@@ -25,9 +25,12 @@ html {
   scroll-behavior: smooth;
 }
 
-body {
-  background-color: var(--bg-neutral);
-  color: var(--text-dark);
+@layer base {
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: 'Inter', sans-serif;
+  }
 }
 
 /* Radix UI overrides */

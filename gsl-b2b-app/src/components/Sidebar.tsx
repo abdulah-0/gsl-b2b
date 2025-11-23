@@ -1,64 +1,58 @@
 import { Link, useLocation } from "react-router-dom";
+import {
+  LayoutDashboard,
+  BookOpen,
+  FileText,
+  Heart,
+  Send,
+  FileEdit,
+  CreditCard,
+  Calendar
+} from "lucide-react";
+import { cn } from "@/lib/utils";
 
-interface SidebarProps {
-  open: boolean;
-  onToggle: () => void;
-}
-
-const menuItems = [
-  { label: "Dashboard", path: "/dashboard", icon: "📊" },
-  { label: "Profile", path: "/dashboard/profile", icon: "👤" },
-  { label: "Educational Background", path: "/dashboard/education", icon: "🎓" },
-  { label: "Test Scores", path: "/dashboard/test-scores", icon: "📝" },
-  { label: "Preferences", path: "/dashboard/preferences", icon: "⚙️" },
-  { label: "Programs", path: "/dashboard/programs", icon: "🏫" },
-  { label: "Applications", path: "/dashboard/applications", icon: "📋" },
-  { label: "Shortlists", path: "/dashboard/shortlists", icon: "⭐" },
-  { label: "Offers", path: "/dashboard/offers", icon: "🎁" },
-  { label: "Events", path: "/dashboard/events", icon: "📅" },
+const navigation = [
+  { name: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
+  { name: "Programs", href: "/dashboard/programs", icon: BookOpen },
+  { name: "Documents", href: "/dashboard/documents", icon: FileText },
+  { name: "Shortlists", href: "/dashboard/shortlists", icon: Heart },
+  { name: "Applications & Offers", href: "/dashboard/applications", icon: Send },
+  { name: "Drafts", href: "/dashboard/drafts", icon: FileEdit },
+  { name: "Visa", href: "/dashboard/visa", icon: CreditCard },
+  { name: "My sessions", href: "/dashboard/sessions", icon: Calendar },
 ];
 
-export const Sidebar = ({ open, onToggle }: SidebarProps) => {
+export function Sidebar() {
   const location = useLocation();
 
   return (
-    <>
-      {/* Overlay for mobile */}
-      {open && (
-        <div
-          className="fixed inset-0 bg-black/50 lg:hidden z-40"
-          onClick={onToggle}
-        />
-      )}
-
-      {/* Sidebar */}
-      <aside
-        className={`fixed lg:static inset-y-0 left-0 z-50 w-64 bg-slate-900 border-r border-slate-700 transform transition-transform duration-300 ${
-          open ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
-        }`}
-      >
-        <div className="p-6">
-          <h1 className="text-2xl font-bold text-cyan mb-8">GSL B2B</h1>
-
-          <nav className="space-y-2">
-            {menuItems.map((item) => (
-              <Link
-                key={item.path}
-                to={item.path}
-                className={`flex items-center space-x-3 px-4 py-3 rounded-lg transition ${
-                  location.pathname === item.path
-                    ? "bg-cyan text-slate-900 font-semibold"
-                    : "text-slate-300 hover:bg-slate-800"
-                }`}
-              >
-                <span className="text-xl">{item.icon}</span>
-                <span>{item.label}</span>
-              </Link>
-            ))}
-          </nav>
+    <div className="flex h-full w-24 flex-col items-center bg-[#2d2d2d] py-6 text-white">
+      <div className="mb-8">
+        {/* Logo Placeholder - Red Bird/Globe */}
+        <div className="flex h-10 w-10 items-center justify-center rounded-full bg-white p-1">
+          <span className="text-xl font-bold text-orange-500">G</span>
         </div>
-      </aside>
-    </>
-  );
-};
+      </div>
 
+      <nav className="flex flex-1 flex-col items-center gap-6 w-full">
+        {navigation.map((item) => {
+          const isActive = location.pathname === item.href ||
+            (item.href !== "/dashboard" && location.pathname.startsWith(item.href));
+          return (
+            <Link
+              key={item.name}
+              to={item.href}
+              className={cn(
+                "group flex flex-col items-center justify-center gap-1 p-2 text-xs font-medium text-gray-400 transition-colors hover:text-white w-full border-l-4 border-transparent",
+                isActive && "text-white border-white bg-white/10"
+              )}
+            >
+              <item.icon className={cn("h-6 w-6", isActive ? "text-white" : "text-gray-400 group-hover:text-white")} />
+              <span className="text-[10px] text-center leading-tight max-w-[60px]">{item.name}</span>
+            </Link>
+          );
+        })}
+      </nav>
+    </div>
+  );
+}
