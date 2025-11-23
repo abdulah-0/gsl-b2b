@@ -77,20 +77,42 @@ export const ForgotPassword = () => {
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-cyan text-slate-900 font-semibold py-2 rounded-lg hover:bg-cyan/90 transition disabled:opacity-50"
+              className="w-full bg-[#1c1c1c] text-white font-bold py-3 rounded-xl hover:bg-black transition-all shadow-lg hover:shadow-xl active:scale-[0.98] disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-2"
             >
-              {loading ? "Sending..." : "Send Reset Link"}
+              {loading ? (
+                <>
+                  <div className="h-4 w-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                  <span>Sending...</span>
+                </>
+              ) : (
+                "Reset Password"
+              )}
             </button>
           </form>
-
-          <div className="mt-6 text-center">
-            <Link to="/login" className="text-cyan hover:text-cyan/80 text-sm">
-              Back to Login
-            </Link>
+        ) : (
+          <div className="text-center space-y-6">
+            <div className="bg-green-50 text-green-700 p-4 rounded-xl text-sm font-medium border border-green-100">
+              Check your email for a link to reset your password. If it doesn't appear within a few minutes, check your spam folder.
+            </div>
+            <button
+              onClick={() => setEmailSent(false)}
+              className="text-sm font-bold text-[#ea580c] hover:text-[#c2410c] transition-colors"
+            >
+              Click to resend
+            </button>
           </div>
+        )}
+
+        <div className="mt-8 pt-6 border-t border-gray-100 text-center">
+          <Link
+            to="/login"
+            className="inline-flex items-center justify-center gap-2 text-sm font-semibold text-gray-500 hover:text-gray-900 transition-colors"
+          >
+            <ArrowLeft className="h-4 w-4" />
+            Back to Login
+          </Link>
         </div>
+      </div>
     </div>
-    </div >
   );
 };
-
