@@ -41,15 +41,20 @@ export const OnboardingPage = () => {
         try {
             const { error } = await supabase
                 .from("profiles")
-                .update({
+                .upsert({
+                    id: user.id,
+                    email: user.email,
                     first_name: data.firstName,
                     last_name: data.lastName,
                     role: data.role,
                     onboarding_completed: true,
-                })
-                .eq("id", user.id);
+                    updated_at: new Date().toISOString(),
+                });
 
-            if (error) throw error;
+            if (error) {
+                console.error("Supabase error details:", error);
+                throw error;
+            }
 
             toast.success("Profile updated!");
             // Force a reload or re-check of auth state if needed, 
@@ -58,8 +63,8 @@ export const OnboardingPage = () => {
             navigate("/dashboard");
             window.location.reload(); // Reload to ensure auth hook picks up the new profile state if it fetches it
         } catch (error) {
-            toast.error("Failed to update profile. Please try again.");
-            console.error(error);
+            console.error("Full error object:", error);
+            toast.error("Failed to update profile. Please check console for details.");
         } finally {
             setLoading(false);
         }
