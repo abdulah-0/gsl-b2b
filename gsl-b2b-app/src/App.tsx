@@ -13,6 +13,7 @@ import { OffersPage } from "./pages/OffersPage";
 import { ShortlistsPage } from "./pages/ShortlistsPage";
 import { PlaceholderPage } from "./pages/PlaceholderPage";
 import { ProtectedRoute } from "./pages/ProtectedRoute";
+import { OnboardingPage } from "./pages/OnboardingPage";
 
 function App() {
   return (
@@ -23,6 +24,15 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/otp-verification" element={<OTPVerification />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
+
+        <Route
+          path="/onboarding"
+          element={
+            <ProtectedRoute>
+              <OnboardingPage />
+            </ProtectedRoute>
+          }
+        />
 
         {/* Dashboard Routes */}
         <Route

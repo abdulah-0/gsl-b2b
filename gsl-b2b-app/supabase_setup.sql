@@ -25,6 +25,9 @@ begin
   if not exists (select 1 from information_schema.columns where table_name = 'profiles' and column_name = 'role') then
     alter table profiles add column role text default 'student';
   end if;
+  if not exists (select 1 from information_schema.columns where table_name = 'profiles' and column_name = 'onboarding_completed') then
+    alter table profiles add column onboarding_completed boolean default false;
+  end if;
 end $$;
 
 -- Set up Row Level Security (RLS)
